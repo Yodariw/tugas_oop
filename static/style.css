@@ -1,0 +1,51 @@
+/* Warna background halaman */
+body {
+    background-color: #f0f2f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Gaya Kartu Produk */
+.card {
+    border: none;
+    border-radius: 12px;
+    background-color: white;
+    transition: all 0.3s ease; /* Animasi halus */
+}
+
+/* Efek saat mouse melayang di atas kartu (Hover) */
+.card:hover {
+    transform: translateY(-5px); /* Kartu naik sedikit */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* Bayangan muncul */
+}
+
+/* Agar gambar produk rapi ukurannya */
+.product-img {
+    height: 200px;
+    object-fit: contain; /* Gambar tidak gepeng */
+    padding: 20px;
+}
+
+/* Judul produk dibatasi 2 baris agar tinggi kartu sama rata */
+.card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    height: 3rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* Harga produk */
+.price-tag {
+    color: #198754;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Tombol detail */
+.btn-custom {
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 8px;
+}
