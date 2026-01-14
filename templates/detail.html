@@ -1,39 +1,81 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Produk</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body class="container py-5 d-flex align-items-center min-vh-100">
+{% extends "layout.html" %}
 
-    <div class="card shadow w-100 p-4">
-        <div class="mb-3">
-            <a href="/" class="btn btn-outline-secondary">← Kembali ke Daftar</a>
-        </div>
-        
-        <div class="row align-items-center">
-            <div class="col-md-4 text-center">
+{% block content %}
+<div class="container py-4">
+    <a href="/" class="btn btn-link text-dark text-decoration-none mb-3">
+        <i class="bi bi-arrow-left"></i> Kembali
+    </a>
+
+    <div class="card border-0 shadow rounded-4 overflow-hidden mb-5">
+        <div class="row g-0">
+            <div class="col-md-5 bg-white p-5 d-flex align-items-center justify-content-center">
                 <img src="{{ product['image'] }}" class="img-fluid" style="max-height: 400px;">
             </div>
-            <div class="col-md-8">
-                <span class="badge bg-warning text-dark mb-2">{{ product['category'] }}</span>
+            
+            <div class="col-md-7 p-5 bg-light">
+                <span class="badge bg-dark mb-3">{{ product['category'] }}</span>
                 <h2 class="fw-bold">{{ product['title'] }}</h2>
-                <h3 class="price-tag my-3">$ {{ product['price'] }}</h3>
                 
-                <p class="text-muted" style="text-align: justify;">
-                    {{ product['description'] }}
-                </p>
+                <h3 class="display-5 fw-bold text-primary my-3">{{ product['price'] | rupiah }}</h3>
+                
+                <p class="text-muted lead">{{ product['description'] }}</p>
+                
+                <form action="/add_to_cart/{{ product['id'] }}" method="POST" class="d-flex gap-3 mt-4 align-items-center">
+                    
+                    <div class="input-group" style="width: 140px;">
+                        <span class="input-group-text bg-white border-0 fw-bold">Qty</span>
+                        <input type="number" name="quantity" class="form-control text-center rounded-end" value="1" min="1" max="10">
+                    </div>
 
-                <div class="d-grid gap-2 d-md-block mt-4">
-                    <button class="btn btn-success btn-lg px-4">Beli Sekarang</button>
-                    <button class="btn btn-outline-primary btn-lg px-4">Keranjang +</button>
-                </div>
+                    <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 flex-grow-1 shadow-sm font-pixel" style="font-size: 0.8rem;">
+                        ADD TO CART
+                    </button>
+
+                    {% if product['id'] in wishlist %}
+                        <a href="/remove_wishlist/{{ product['id'] }}" class="btn btn-light border btn-lg rounded-circle d-flex align-items-center justify-content-center text-danger" style="width:50px; height:50px; box-shadow: 2px 2px 0px rgba(0,0,0,0.1);">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2H5v2H3v2H1v6h2v2h2v2h2v2h2v2h2v-2h2v-2h2v-2h2v-2h2v-6h-2V4h-2V2h-4v2h-2V2z"/></svg>
+                        </a>
+                    {% else %}
+                        <a href="/add_to_wishlist/{{ product['id'] }}" class="btn btn-light border btn-lg rounded-circle d-flex align-items-center justify-content-center text-secondary" style="width:50px; height:50px;">
+                             <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.3"><path d="M9 2H5v2H3v2H1v6h2v2h2v2h2v2h2v2h2v-2h2v-2h2v-2h2v-2h2v-6h-2V4h-2V2h-4v2h-2V2z"/></svg>
+                        </a>
+                    {% endif %}
+                </form>
             </div>
         </div>
     </div>
 
-</body>
-</html>
+    <h4 class="fw-bold mb-4 font-pixel" style="font-size: 1.2rem;">Produk Serupa</h4>
+    <div class="row g-4">
+        {% for item in related %}
+        <div class="col-md-3 col-6">
+            <div class="card product-card h-100">
+                <div class="image-container p-3">
+                    <img src="{{ item['image'] }}" class="img-fluid" style="max-height:120px">
+                    <div class="hover-actions" style="bottom: 10px;">
+                        {% if item['id'] in wishlist %}
+                            <a href="/remove_wishlist/{{ item['id'] }}" class="btn-action btn-love-pixel active">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2H5v2H3v2H1v6h2v2h2v2h2v2h2v2h2v-2h2v-2h2v-2h2v-2h2v-6h-2V4h-2V2h-4v2h-2V2z"/></svg>
+                            </a>
+                        {% else %}
+                            <a href="/add_to_wishlist/{{ item['id'] }}" class="btn-action btn-love-pixel">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2H5v2H3v2H1v6h2v2h2v2h2v2h2v2h2v-2h2v-2h2v-2h2v-2h2v-6h-2V4h-2V2h-4v2h-2V2z" fill-opacity="0.3"/></svg>
+                            </a>
+                        {% endif %}
+                        <a href="/add_to_cart/{{ item['id'] }}" class="btn-action btn-cart"><i class="bi bi-bag-plus-fill"></i></a>
+                    </div>
+                </div>
+                
+                <div class="card-body text-center">
+                    <h6 class="card-title text-truncate">{{ item['title'] }}</h6>
+                    
+                    <span class="fw-bold text-primary">{{ item['price'] | rupiah }}</span>
+                    
+                    <a href="/product/{{ item['id'] }}" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

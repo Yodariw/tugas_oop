@@ -1,29 +1,83 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toko Katalog Sederhana</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body class="container py-5">
-    
-    <div class="text-center mb-5">
-        <h1 class="fw-bold">✨ Katalog Produk Keren</h1>
+{% extends "layout.html" %}
+
+{% block content %}
+{% if not search_query and active_category == 'all' and page == 1 %}
+<div class="container mb-5">
+    <header class="hero-section">
+        <div class="row align-items-center" style="min-height: 450px;">
+            
+            <div class="col-md-6 order-2 order-md-1 position-relative z-2 text-center text-md-start">
+                <div class="badge bg-white text-danger mb-4 font-pixel px-4 py-2 shadow-sm d-inline-block" style="font-size: 0.7rem; letter-spacing: 1px; transform: rotate(-2deg);">
+                     <i class="bi bi-joystick me-1"></i> LEVEL UP SALE!
+                </div>
+                <h1 class="display-3 fw-bold hero-title mb-4 font-pixel" style="color: #fff; text-shadow: 4px 4px 0 #d63031, 6px 6px 0 rgba(0,0,0,0.2);">
+                    DISCOUNT<br>
+                    <span style="color: #ffdd59; -webkit-text-stroke: 1.5px #d63031;">UP TO 50%</span>
+                </h1>
+                <p class="lead text-white mb-5 fw-bold opacity-90" style="font-family: 'Poppins', sans-serif; letter-spacing: 0.5px;">
+                    Lengkapi inventory fashion-mu dengan item legendaris harga miring minggu ini!
+                </p>
+                <div class="d-flex gap-3 justify-content-center justify-content-md-start">
+                    <a href="#katalog" class="btn btn-hero-pixel rounded-pill px-5 py-3 fw-bold font-pixel text-decoration-none" style="font-size: 0.85rem;">
+                        MULAI QUEST BELANJA
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 order-1 order-md-2 mb-5 mb-md-0">
+                <div class="right-column-deco">
+                    <i class="bi bi-handbag-fill pixel-icon-float pi-1"></i>
+                    <i class="bi bi-heart-fill pixel-icon-float pi-2"></i>
+                    <i class="bi bi-gem pixel-icon-float pi-3"></i>
+                    <i class="bi bi-controller pixel-icon-float pi-4"></i>
+                    <i class="bi bi-star-fill pixel-icon-float pi-5"></i>
+                </div>
+            </div>
+
+        </div>
+    </header>
+</div>
+{% endif %}
+
+<div class="container" id="katalog">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold m-0 font-pixel" style="font-size: 1.2rem;">{% if search_query %} Hasil: "{{ search_query }}" {% else %} Katalog Produk {% endif %}</h4>
+        <form action="/" method="get">
+            <input type="hidden" name="q" value="{{ search_query }}">
+            <select name="sort" class="form-select border-dark rounded-pill" onchange="this.form.submit()">
+                <option value="default" {% if sort_option == 'default' %}selected{% endif %}>Rekomendasi</option>
+                <option value="price_asc" {% if sort_option == 'price_asc' %}selected{% endif %}>Harga Terendah</option>
+                <option value="price_desc" {% if sort_option == 'price_desc' %}selected{% endif %}>Harga Tertinggi</option>
+            </select>
+        </form>
     </div>
 
-    <div class="row">
+    <div class="row g-4">
         {% for item in products %}
-        <div class="col-md-3 col-sm-6 mb-4">
-            <div class="card h-100 p-2">
-                <img src="{{ item['image'] }}" class="card-img-top product-img" alt="Gambar Produk">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ item['title'] }}</h5>
-                    
-                    <div class="mt-auto">
-                        <p class="price-tag mb-3">$ {{ item['price'] }}</p>
-                        <a href="/product/{{ item['id'] }}" class="btn btn-custom w-100">Lihat Detail</a>
+        <div class="col-md-3 col-sm-6">
+            <div class="card product-card h-100">
+                <div class="image-container">
+                    <img src="{{ item['image'] }}" class="product-img">
+                    <div class="hover-actions">
+                        {% if item['id'] in wishlist %}
+                            <a href="/remove_wishlist/{{ item['id'] }}" class="btn-action btn-love-pixel active" title="Hapus">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2H5v2H3v2H1v6h2v2h2v2h2v2h2v2h2v-2h2v-2h2v-2h2v-2h2v-6h-2V4h-2V2h-4v2h-2V2z"/></svg>
+                            </a>
+                        {% else %}
+                            <a href="/add_to_wishlist/{{ item['id'] }}" class="btn-action btn-love-pixel" title="Suka">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 2H5v2H3v2H1v6h2v2h2v2h2v2h2v2h2v-2h2v-2h2v-2h2v-2h2v-6h-2V4h-2V2h-4v2h-2V2z" fill-opacity="0.3"/></svg>
+                            </a>
+                        {% endif %}
+                        <a href="/add_to_cart/{{ item['id'] }}" class="btn-action btn-cart"><i class="bi bi-bag-plus-fill"></i></a>
+                    </div>
+                </div>
+                <div class="card-body pt-2">
+                    <small class="text-muted text-uppercase" style="font-size:0.7rem">{{ item['category'] }}</small>
+                    <h6 class="card-title my-1"><a href="/product/{{ item['id'] }}" class="text-decoration-none text-dark">{{ item['title'] }}</a></h6>
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <span class="price-tag">{{ item['price'] | rupiah }}</span>
+                        
+                        <small class="text-warning"><i class="bi bi-star-fill"></i> 4.5</small>
                     </div>
                 </div>
             </div>
@@ -31,5 +85,16 @@
         {% endfor %}
     </div>
 
-</body>
-</html>
+    {% if total_pages > 1 %}
+    <div class="d-flex justify-content-center mt-5">
+        <ul class="pagination">
+            {% for p in range(1, total_pages + 1) %}
+            <li class="page-item {% if p == page %}active{% endif %}">
+                <a class="page-link rounded-circle mx-1" href="/?page={{ p }}&sort={{ sort_option }}&q={{ search_query }}">{{ p }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

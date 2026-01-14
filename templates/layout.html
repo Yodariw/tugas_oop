@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lovely Shop</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/love1.png') }}" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="navbar-wrapper">
+        <div class="container py-3">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <a href="/" class="brand-logo">
+                        <img src="{{ url_for('static', filename='img/love1.png') }}" alt="Logo" style="height: 40px; width: auto; margin-right: 10px;">
+                        <span>Lovely Shop</span>
+                    </a>
+                </div>
+                <div class="col-md-5 d-none d-md-block">
+                    <form action="/" method="get" class="position-relative">
+                        <input type="text" name="q" class="form-control search-zalora" placeholder="Cari barang...">
+                        <button class="btn border-0 position-absolute top-50 end-0 translate-middle-y me-2"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+                <div class="col-md-3 d-flex justify-content-end gap-3 align-items-center">
+                    <a href="#" class="nav-icon-link"><i class="bi bi-person"></i><span>Akun</span></a>
+                    <a href="/wishlist" class="nav-icon-link position-relative">
+                        <i class="bi bi-heart"></i><span>Suka</span>
+                        {% if wishlist_count > 0 %}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:0.6rem">{{ wishlist_count }}</span>
+                        {% endif %}
+                    </a>
+                    <a href="/cart" class="nav-icon-link position-relative">
+                        <i class="bi bi-bag"></i><span>Tas</span>
+                        {% if cart_count > 0 %}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary" style="font-size:0.6rem">{{ cart_count }}</span>
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-nav bg-white border-top">
+            <div class="container d-flex justify-content-center">
+                <nav class="nav">
+                    <a class="nav-category-link {{ 'active' if active_category == 'all' }}" href="/">Semua</a>
+                    <a class="nav-category-link {{ 'active' if active_category == 'men\'s clothing' }}" href="/category/men's clothing">Pria</a>
+                    <a class="nav-category-link {{ 'active' if active_category == 'women\'s clothing' }}" href="/category/women's clothing">Wanita</a>
+                    <a class="nav-category-link {{ 'active' if active_category == 'jewelery' }}" href="/category/jewelery">Luxury</a>
+                    <a class="nav-category-link {{ 'active' if active_category == 'electronics' }}" href="/category/electronics">Gadget</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show border-0 shadow-sm" role="alert">
+                    <i class="bi bi-info-circle-fill me-2"></i> {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    {% block content %}{% endblock %}
+
+   <footer class="footer-retro mt-5 pt-5 pb-3">
+        <div class="footer-pixel-border"></div>
+
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-md-4 mb-4">
+                    <h5 class="font-pixel text-warning mb-3" style="text-shadow: 2px 2px 0 #d63031;">
+                        <i class="bi bi-joystick me-2"></i>LOVELY SHOP
+                    </h5>
+                    <p class="text-white-50 pe-md-5" style="font-size: 0.9rem;">
+                        Level up gaya kamu dengan koleksi fashion pixel-perfect kami. Temukan item legendaris dengan harga terbaik di sini!
+                    </p>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <h6 class="font-pixel text-white mb-3">QUICK MENU</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="footer-link">Home Base</a></li>
+                        <li><a href="/?category=pria" class="footer-link">Koleksi Pria</a></li>
+                        <li><a href="/?category=wanita" class="footer-link">Koleksi Wanita</a></li>
+                        <li><a href="#katalog" class="footer-link">Semua Item</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <h6 class="font-pixel text-white mb-3">CONNECT</h6>
+                    <ul class="list-unstyled text-white-50 mb-4" style="font-size: 0.9rem;">
+                        <li class="mb-2"><i class="bi bi-geo-alt-fill me-2 text-danger"></i> Negara Wakanda, Mpruyy</li>
+                        <li class="mb-2"><i class="bi bi-envelope-fill me-2 text-danger"></i> support@lovelyshop.gmail</li>
+                    </ul>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn-social-pixel"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="btn-social-pixel"><i class="bi bi-tiktok"></i></a>
+                        <a href="#" class="btn-social-pixel"><i class="bi bi-twitter-x"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-light opacity-25 mt-4">
+
+            <div class="row py-3 align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                    <small class="text-white-50 font-pixel" style="font-size: 0.7rem;">
+                        &copy; 2026 Lovely Shop. All rights reserved.
+                    </small>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <small class="text-white-50">
+                        Made with <i class="bi bi-heart-fill text-danger px-1"></i>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

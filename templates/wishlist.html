@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="fw-bold mb-4 font-pixel">Favorit Saya</h2>
+    {% if wish_items %}
+    <div class="row g-4">
+        {% for item in wish_items %}
+        <div class="col-md-3 col-6">
+            <div class="card product-card h-100 shadow-sm">
+                <a href="/remove_wishlist/{{ item['id'] }}" class="position-absolute top-0 end-0 m-2 text-danger fs-5" style="z-index:10"><i class="bi bi-x-circle-fill"></i></a>
+                <div class="image-container p-3">
+                    <img src="{{ item['image'] }}" class="img-fluid" style="max-height:150px">
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title text-truncate">{{ item['title'] }}</h6>
+                    <p class="fw-bold text-primary">$ {{ item['price'] }}</p>
+                    <div class="d-grid">
+                        <form action="/add_to_cart/{{ item['id'] }}" method="POST">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn btn-dark btn-sm rounded-pill w-100">Pindahkan ke Tas</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <p class="text-muted">Belum ada barang yang disukai.</p>
+        <a href="/" class="btn btn-outline-dark rounded-pill">Cari Barang</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
