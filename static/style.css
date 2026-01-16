@@ -1,5 +1,9 @@
-/* GLOBAL STYLE */
-body { background-color: #f8f9fa; font-family: 'Poppins', sans-serif; padding-top: 155px; }
+/* ================= GLOBAL STYLE ================= */
+body { 
+    background-color: #f8f9fa; 
+    font-family: 'Poppins', sans-serif; 
+    padding-top: 155px; /* Jarak agar tidak tertutup navbar */
+}
 
 /* FONT PIXEL KHUSUS */
 .font-pixel, .brand-logo, .hero-title {
@@ -7,109 +11,254 @@ body { background-color: #f8f9fa; font-family: 'Poppins', sans-serif; padding-to
     text-transform: uppercase;
 }
 
-/* NAVBAR STYLES */
-.navbar-wrapper { background-color: #ffffff; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-.brand-logo { font-size: 1.1rem; color: #000; text-decoration: none; display: flex; align-items: center; gap: 10px; letter-spacing: -1px; }
-.search-zalora { background: #f1f2f6; border: none; border-radius: 50px; padding: 12px 25px; }
-.search-zalora:focus { background: #fff; box-shadow: 0 0 0 2px #333; }
-.nav-category-link { color: #555; font-weight: 600; text-transform: uppercase; font-size: 0.8rem; padding: 15px 20px; text-decoration: none; display: inline-block; position: relative; }
-.nav-category-link:hover::after, .nav-category-link.active::after { width: 100%; }
-.nav-category-link::after { content: ''; display: block; width: 0; height: 2px; background: #000; transition: width .3s; margin-top: 2px; }
-.nav-icon-link { text-decoration: none; color: #333; display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; }
-.nav-icon-link i { font-size: 1.3rem; margin-bottom: 2px; }
+/* ================= NAVBAR STYLES ================= */
+.navbar-wrapper { 
+    background-color: #ffffff; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    z-index: 1000; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+}
+.brand-logo { 
+    font-size: 1.1rem; 
+    color: #000; 
+    text-decoration: none; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    letter-spacing: -1px; 
+}
+.search-zalora { 
+    background: #f1f2f6; 
+    border: none; 
+    border-radius: 50px; 
+    padding: 12px 25px; 
+}
+.search-zalora:focus { 
+    background: #fff; 
+    box-shadow: 0 0 0 2px #333; 
+}
+.nav-category-link { 
+    color: #555; 
+    font-weight: 600; 
+    text-transform: uppercase; 
+    font-size: 0.8rem; 
+    padding: 15px 20px; 
+    text-decoration: none; 
+    display: inline-block; 
+    position: relative; 
+}
+.nav-category-link:hover::after, .nav-category-link.active::after { 
+    width: 100%; 
+}
+.nav-category-link::after { 
+    content: ''; 
+    display: block; 
+    width: 0; 
+    height: 2px; 
+    background: #000; 
+    transition: width .3s; 
+    margin-top: 2px; 
+}
+.nav-icon-link { 
+    text-decoration: none; 
+    color: #333; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    font-size: 0.7rem; 
+}
+.nav-icon-link i { 
+    font-size: 1.3rem; 
+    margin-bottom: 2px; 
+}
 
-/* PRODUCT CARD STYLES */
-.product-card { border: none; border-radius: 12px; background: white; transition: all 0.3s ease; overflow: hidden; }
-.product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-.image-container { height: 250px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 20px; }
-.product-img { max-height: 180px; transition: transform 0.4s; }
-.product-card:hover .product-img { transform: scale(1.1); }
-.hover-actions { position: absolute; bottom: -60px; left: 0; width: 100%; display: flex; justify-content: center; gap: 10px; padding-bottom: 15px; transition: all 0.3s ease; opacity: 0; }
-.product-card:hover .hover-actions { bottom: 0; opacity: 1; }
-.btn-action { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15); font-size: 1.1rem; transition: all 0.2s; }
-.btn-action:hover { transform: scale(1.1); }
-.btn-cart { background: #000; color: white; border: none; }
-.btn-cart:hover { background: #333; }
+/* ================= PRODUCT CARD STYLES ================= */
+.product-card { 
+    border: none; 
+    border-radius: 12px; 
+    background: white; 
+    transition: all 0.3s ease; 
+    overflow: hidden; 
+}
+.product-card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+}
+.image-container { 
+    height: 250px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    position: relative; 
+    overflow: hidden; 
+    padding: 20px; 
+}
+.product-img { 
+    max-height: 180px; 
+    transition: transform 0.4s; 
+}
+.product-card:hover .product-img { 
+    transform: scale(1.1); 
+}
+.hover-actions { 
+    position: absolute; 
+    bottom: -60px; 
+    left: 0; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    gap: 10px; 
+    padding-bottom: 15px; 
+    transition: all 0.3s ease; 
+    opacity: 0; 
+}
+.product-card:hover .hover-actions { 
+    bottom: 0; 
+    opacity: 1; 
+}
+.btn-action { 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+    font-size: 1.1rem; 
+    transition: all 0.2s; 
+}
+.btn-action:hover { 
+    transform: scale(1.1); 
+}
+.btn-cart { 
+    background: #000; 
+    color: white; 
+    border: none; 
+}
+.btn-cart:hover { 
+    background: #333; 
+}
 
 /* TOMBOL LOVE PIXEL */
-.btn-love-pixel { background: white; color: #000; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; transition: all 0.1s steps(5); }
-.btn-love-pixel:hover { color: #ff6b6b; border-color: #ff6b6b; transform: scale(1.1); }
-.btn-love-pixel.active { background: #d63031; color: white !important; border-color: #d63031; box-shadow: 3px 3px 0px rgba(0,0,0,0.2); }
-.btn-love-pixel.active:hover { background: #e17055; transform: translate(2px, 2px); box-shadow: 1px 1px 0px rgba(0,0,0,0.2); }
+.btn-love-pixel { 
+    background: white; 
+    color: #000; 
+    border: 1px solid #ddd; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    transition: all 0.1s steps(5); 
+}
+.btn-love-pixel:hover { 
+    color: #ff6b6b; 
+    border-color: #ff6b6b; 
+    transform: scale(1.1); 
+}
+.btn-love-pixel.active { 
+    background: #d63031; 
+    color: white !important; 
+    border-color: #d63031; 
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.2); 
+}
+.btn-love-pixel.active:hover { 
+    background: #e17055; 
+    transform: translate(2px, 2px); 
+    box-shadow: 1px 1px 0px rgba(0,0,0,0.2); 
+}
 
-.price-tag { color: #000; font-weight: 800; font-size: 1.1rem; }
-.card-title { font-size: 0.9rem; font-weight: 600; height: 2.2rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-.page-item.active .page-link { background: #000; color: white; border-radius: 50%; border: none; }
-.page-link { color: #333; border: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+.price-tag { 
+    color: #000; 
+    font-weight: 800; 
+    font-size: 1.1rem; 
+}
+.card-title { 
+    font-size: 0.9rem; 
+    font-weight: 600; 
+    height: 2.2rem; 
+    overflow: hidden; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 2; /* Ini standar praktis meski ada warning */
+    -webkit-box-orient: vertical; 
+}
+.page-item.active .page-link { 
+    background: #000; 
+    color: white; 
+    border-radius: 50%; 
+    border: none; 
+}
+.page-link { 
+    color: #333; 
+    border: none; 
+    width: 40px; 
+    height: 40px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: bold; 
+}
 
-/* Hero Sectiion Style */
+/* ================= HERO SECTION (SOFT PINK RETRO) ================= */
 .hero-section {
     position: relative;
     overflow: hidden;
-    /* Latar Belakang Baru: Gradien Pink Soft Pastel */
     background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 50%, #ffdde1 100%);
     
-    /* Motif Grid Putih Tipis (samar-samar) */
+    /* Motif Grid */
     background-image:
-        linear-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
     background-size: 30px 30px;
     
     padding: 80px 40px;
-    /* Teks dasar berwarna gelap agar terbaca di background terang */
-    color: #5e1737 !important; /* Warna Ungu Kemerahan Tua */
-    
-    border: 4px solid #fff; /* Border Putih Bersih */
+    color: #5e1737 !important; /* Ungu Kemerahan Tua */
+    border: 4px solid #fff; 
     border-radius: 30px;
-    /* Bayangan lembut berwarna pink */
     box-shadow: 0 20px 40px rgba(238, 156, 167, 0.4), inset 0 0 50px rgba(255,255,255,0.7);
 }
 
-/* Badge "LEVEL UP SALE" */
 .hero-section .badge {
-    background-color: #d63031 !important; /* Badge Merah */
-    color: #ffffff !important; /* Teks Putih */
+    background-color: #d63031 !important;
+    color: #ffffff !important;
     box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
 }
 
-/* Judul Besar */
 .hero-title {
-    /* Teks Utama: Merah Tua Gelap */
     color: #c0392b !important;
-    /* Bayangan teks putih tipis agar pop-up */
     text-shadow: 3px 3px 0 #fff, 5px 5px 0 rgba(0,0,0,0.1);
 }
-/* Teks Highlight "UP TO 50%" */
+
 .hero-title span {
-    color: #ffdd59 !important; /* Kuning Emas */
-    /* Stroke Merah agar sangat jelas */
+    color: #ffdd59 !important;
     -webkit-text-stroke: 2px #c0392b;
     text-shadow: 3px 3px 0 rgba(255,255,255,0.5);
 }
 
-/* Sub-judul (Paragraf) */
 .hero-section .lead {
-    color: #5e1737 !important; /* Warna teks gelap */
+    color: #5e1737 !important;
     font-weight: 600;
     text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
     opacity: 0.9;
 }
 
-/* TOMBOL "MULAI QUEST BELANJA" (Gaya Retro Merah) */
 .btn-hero-pixel {
-    background: #d63031; /* Warna Merah */
-    color: #ffffff !important; /* Teks Putih */
-    border: 3px solid #fff; /* Border Putih */
-    box-shadow: 0 5px 0 #a12627; /* Bayangan 3D merah tua */
+    background: #d63031;
+    color: #ffffff !important;
+    border: 3px solid #fff;
+    box-shadow: 0 5px 0 #a12627;
     transition: all 0.2s;
     position: relative; z-index: 2;
 }
+
 .btn-hero-pixel:hover {
     transform: translateY(3px);
     box-shadow: 0 2px 0 #a12627;
-    background: #ff4757; /* Merah lebih terang saat hover */
+    background: #ff4757;
     color: white !important;
 }
+
 .btn-hero-pixel:active {
     transform: translateY(5px);
     box-shadow: none;
@@ -119,39 +268,35 @@ body { background-color: #f8f9fa; font-family: 'Poppins', sans-serif; padding-to
 .right-column-deco {
     position: relative; height: 450px; display: flex; justify-content: center; align-items: center; perspective: 1000px;
 }
-/* Ikon Melayang - Diberi outline putih agar jelas di background pink */
+
 .pixel-icon-float {
     position: absolute; font-size: 5rem; 
     animation: floatRotate 7s ease-in-out infinite;
-    /* Stroke putih di sekeliling ikon */
     -webkit-text-stroke: 2px white;
     filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.1));
 }
+
 @keyframes floatRotate {
     0% { transform: translateY(0px) rotate(0deg) scale(1); }
     50% { transform: translateY(-25px) rotate(10deg) scale(1.1); }
     100% { transform: translateY(0px) rotate(0deg) scale(1); }
 }
-/* Warna Ikon */
-.pi-1 { top: 15%; left: 10%; animation-delay: 0.5s; color: #f1c40f; font-size: 4rem; } /* Kuning */
-.pi-2 { top: 30%; right: 15%; animation-delay: 0s; color: #e74c3c; font-size: 7rem; z-index: 2; } /* Merah */
-.pi-3 { bottom: 20%; left: 25%; animation-delay: 1.5s; color: #3498db; font-size: 3.5rem; } /* Biru */
-.pi-4 { bottom: 35%; right: 5%; animation-delay: 1s; color: #2ecc71; font-size: 5rem; } /* Hijau */
-.pi-5 { top: 50%; left: 50%; animation-delay: 2s; color: #eb7b7b; font-size: 2.5rem; opacity: 0.6; -webkit-text-stroke: 0; } /* Bintang Putih */
 
-/* Footer Style */
+.pi-1 { top: 15%; left: 10%; animation-delay: 0.5s; color: #f1c40f; font-size: 4rem; } 
+.pi-2 { top: 30%; right: 15%; animation-delay: 0s; color: #e74c3c; font-size: 7rem; z-index: 2; } 
+.pi-3 { bottom: 20%; left: 25%; animation-delay: 1.5s; color: #3498db; font-size: 3.5rem; } 
+.pi-4 { bottom: 35%; right: 5%; animation-delay: 1s; color: #2ecc71; font-size: 5rem; } 
+.pi-5 { top: 50%; left: 50%; animation-delay: 2s; color: #f767ff; font-size: 2.5rem; opacity: 0.6; -webkit-text-stroke: 0; }
+
+/* ================= FOOTER RETRO STYLE ================= */
 .footer-retro {
-    /* Latar Belakang Gelap Kontras (Ungu Tua ke Biru Gelap) */
     background: linear-gradient(to right, #2c003e, #1e002a);
     color: #fff;
     position: relative;
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.2); /* Bayangan ke atas */
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.2); 
 }
 
-/* Hiasan Border Pixel di Atas Footer */
 .footer-pixel-border {
-    margin-bottom: 5px ;
-    padding: 2px;
     height: 8px;
     width: 100%;
     background-image: repeating-linear-gradient(
@@ -164,9 +309,8 @@ body { background-color: #f8f9fa; font-family: 'Poppins', sans-serif; padding-to
     border-bottom: 4px solid #2c003e;
 }
 
-/* Style Link di Footer */
 .footer-link {
-    color: rgba(255,255,255,0.6) !important; /* Putih agak transparan */
+    color: rgba(255,255,255,0.6) !important;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: block;
@@ -175,13 +319,12 @@ body { background-color: #f8f9fa; font-family: 'Poppins', sans-serif; padding-to
     position: relative;
 }
 
-/* Efek Hover pada Link (Geser & Berubah Warna) */
 .footer-link:hover {
-    color: #ffdd59 !important; /* Kuning emas saat hover */
-    padding-left: 10px; /* Geser ke kanan */
+    color: #ffdd59 !important;
+    padding-left: 10px;
     text-shadow: 2px 2px 0 rgba(214, 48, 49, 0.5);
 }
-/* Menambahkan ikon panah pixel saat hover */
+
 .footer-link:hover::before {
     content: '►';
     font-size: 0.7rem;
@@ -189,25 +332,23 @@ body { background-color: #f8f9fa; font-family: 'Poppins', sans-serif; padding-to
     color: #d63031;
 }
 
-/* Tombol Social Media Pixel */
 .btn-social-pixel {
     display: inline-flex;
     align-items: center; justify-content: center;
     width: 40px; height: 40px;
-    background: #2c003e; /* Warna dasar gelap */
+    background: #2c003e;
     color: #fff;
     border: 2px solid rgba(255,255,255,0.2);
-    border-radius: 8px; /* Kotak rounded */
+    border-radius: 8px;
     text-decoration: none;
     transition: all 0.2s;
     font-size: 1.1rem;
 }
 
-/* Efek Hover Tombol Sosmed (Muncul 3D) */
 .btn-social-pixel:hover {
-    background: #d63031; /* Jadi merah */
-    border-color: #ffdd59; /* Border kuning */
+    background: #d63031;
+    border-color: #ffdd59;
     color: #fff;
-    transform: translateY(-4px); /* Naik ke atas */
-    box-shadow: 4px 4px 0 #ffdd59; /* Bayangan kuning 3D */
+    transform: translateY(-4px);
+    box-shadow: 4px 4px 0 #ffdd59;
 }
